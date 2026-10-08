@@ -1,0 +1,2363 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài tập Giải tích thực một biến (MATH221A) nhóm 4 - QUÂN NGUYỄN STUDY</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ==================== STYLES & THEMING ==================== */
+        :root {
+            --primary: rgb(21, 101, 192);
+            --primary-dark: #124080;
+            --primary-light: rgb(209, 234, 255);
+            --panel-bg: rgb(229, 244, 255);
+            --bg-color: #f4f8fb;
+            --card-bg: #FFFFFF;
+            --text-main: #1f2937;
+            --text-muted: #6b7280;
+            --border-color: #cbd5e1;
+            
+            --success-bg: #E8F5E9;
+            --success-text: #2e7d32;
+            --warning-bg: #fff8e1;
+            --warning-border: #ffe082;
+            --warning-text: #b78103;
+            
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.12);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            
+            --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+            --font-code: 'Fira Code', 'Courier New', monospace;
+            --font-math: "CMU Serif", Georgia, "Times New Roman", serif;
+        }
+
+        [data-theme="dark"] {
+            --primary: #42a5f5;
+            --primary-dark: #1e88e5;
+            --primary-light: #1e293b;
+            --panel-bg: #1e293b;
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+            
+            --success-bg: #14532d;
+            --success-text: #86efac;
+            --warning-bg: #422006;
+            --warning-border: #854d0e;
+            --warning-text: #fde047;
+            
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.5);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Status Bar */
+        .status-bar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background-color: rgb(21, 101, 192);
+            color: #FFFFFF;
+            padding: 0.75rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow-md);
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+        }
+
+        .brand-logo svg {
+            width: 22px;
+            height: 22px;
+            fill: currentColor;
+        }
+
+        .status-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border-radius: var(--radius-sm);
+            border: 1px solid transparent;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            font-family: var(--font-sans);
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: #FFFFFF;
+        }
+        .btn-primary:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        .btn-outline-light {
+            background: transparent;
+            border-color: rgba(255, 255, 255, 0.4);
+            color: #FFFFFF;
+        }
+        .btn-outline-light:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: #FFFFFF;
+        }
+
+        .btn-secondary {
+            background-color: var(--panel-bg);
+            color: var(--text-main);
+            border-color: var(--border-color);
+        }
+        .btn-secondary:hover {
+            background-color: var(--border-color);
+        }
+
+        .btn-success {
+            background-color: #2e7d32;
+            color: #ffffff;
+        }
+        .btn-success:hover {
+            background-color: #1b5e20;
+        }
+
+        .btn-sm {
+            padding: 0.35rem 0.75rem;
+            font-size: 0.825rem;
+        }
+
+        /* Layout Container */
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 1.5rem;
+            flex: 1;
+        }
+
+        /* Login Screen */
+        .login-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 120px);
+        }
+
+        .login-card {
+            background-color: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            width: 100%;
+            max-width: 440px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .login-card h2 {
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .login-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1.75rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.65rem 0.9rem;
+            font-size: 0.95rem;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-color);
+            background-color: var(--card-bg);
+            color: var(--text-main);
+            outline: none;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(21, 101, 192, 0.15);
+        }
+
+        .error-message {
+            color: #d32f2f;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            display: none;
+            text-align: left;
+        }
+
+        /* App Dashboard */
+        .app-header {
+            background-color: var(--card-bg);
+            padding: 1.5rem 2.0rem;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .app-title h1 {
+            font-size: 1.4rem;
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .student-meta {
+            display: flex;
+            gap: 1.25rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            align-items: center;
+        }
+
+        .badge-status {
+            background-color: var(--panel-bg);
+            color: var(--primary);
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Main Section Cards */
+        .section-card {
+            background-color: var(--card-bg);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            margin-bottom: 1.75rem;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.25rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Code Block & Preamble (Giao diện sáng TeXstudio) */
+        .code-block-container {
+            position: relative;
+            background-color: #ffffff;
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            margin-bottom: 1rem;
+        }
+
+        .code-block-header {
+            background-color: #f1f5f9;
+            padding: 0.4rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #475569;
+            font-size: 0.8rem;
+            font-family: var(--font-code);
+            border-bottom: 1px solid var(--border-color);
+            font-weight: 600;
+        }
+
+        .code-block {
+            padding: 1rem;
+            font-family: Consolas, "Courier New", monospace;
+            font-size: 0.875rem;
+            color: #1e293b;
+            background-color: #ffffff;
+            overflow-x: auto;
+            white-space: pre;
+            line-height: 1.6;
+        }
+
+        /* Dark Mode thích ứng cho Code Block */
+        [data-theme="dark"] .code-block-container {
+            background-color: #0f172a;
+        }
+        [data-theme="dark"] .code-block-header {
+            background-color: #1e293b;
+            color: #94a3b8;
+        }
+        [data-theme="dark"] .code-block {
+            background-color: #0f172a;
+            color: #f8fafc;
+        }
+
+        /* TeXstudio Syntax Highlighting — Light Mode */
+        .latex-cmd, .tex-cmd, .tex-kw { color: #1565c0; font-weight: 600; }
+        .latex-env, .tex-env { color: #7b1fa2; font-weight: bold; }
+        .latex-opt, .tex-opt { color: #b45309; }
+        .latex-arg, .tex-arg { color: #008000; }
+        .latex-comment, .tex-comment { color: #2e7d32; font-style: italic; }
+        .latex-math { color: #00796b; font-weight: 500; }
+        .latex-bracket { color: #64748b; }
+
+        /* TeXstudio Syntax Highlighting — Dark Mode */
+        [data-theme="dark"] .latex-cmd, [data-theme="dark"] .tex-cmd, [data-theme="dark"] .tex-kw { color: #64b5f6; }
+        [data-theme="dark"] .latex-env, [data-theme="dark"] .tex-env { color: #ba68c8; }
+        [data-theme="dark"] .latex-opt, [data-theme="dark"] .tex-opt { color: #f59e0b; }
+        [data-theme="dark"] .latex-arg, [data-theme="dark"] .tex-arg { color: #4ade80; }
+        [data-theme="dark"] .latex-comment, [data-theme="dark"] .tex-comment { color: #81c784; }
+        [data-theme="dark"] .latex-math { color: #ffd54f; }
+        [data-theme="dark"] .latex-bracket { color: #94a3b8; }
+
+        .info-box {
+            background-color: var(--warning-bg);
+            border-left: 4px solid var(--warning-border);
+            color: var(--warning-text);
+            padding: 0.85rem 1.1rem;
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+
+        /* Toolbar & Progress Bar */
+        .toolbar-progress {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            background-color: var(--panel-bg);
+            padding: 1rem 1.25rem;
+            border-radius: var(--radius-sm);
+            margin-bottom: 1.25rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .toolbar-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .progress-container {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .progress-bar-bg {
+            flex: 1;
+            height: 10px;
+            background-color: var(--border-color);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background-color: var(--primary);
+            width: 0%;
+            transition: width 0.4s ease;
+        }
+
+        .progress-percent {
+            font-weight: 700;
+            font-size: 0.875rem;
+            color: var(--primary);
+            min-width: 48px;
+            text-align: right;
+        }
+
+        .progress-indicator {
+            font-weight: 600;
+            font-size: 0.925rem;
+            color: var(--text-main);
+        }
+
+        /* Submission Metadata on Cards */
+        .submission-meta {
+            font-size: 0.825rem;
+            color: var(--text-muted);
+            background-color: var(--panel-bg);
+            padding: 0.5rem 0.75rem;
+            border-radius: var(--radius-sm);
+            border: 1px dashed var(--border-color);
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .submission-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            flex-wrap: wrap;
+        }
+
+        .submission-meta-item strong {
+            color: var(--text-main);
+        }
+
+        /* Progress Table & Stats in Modal */
+        .progress-stats-summary {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-card {
+            background-color: var(--panel-bg);
+            padding: 0.75rem 1rem;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-color);
+            flex: 1;
+            min-width: 120px;
+            text-align: center;
+        }
+
+        .stat-card .stat-value {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stat-card .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .progress-table-wrapper {
+            overflow-x: auto;
+            width: 100%;
+        }
+
+        .progress-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            text-align: left;
+        }
+
+        .progress-table th, .progress-table td {
+            padding: 0.6rem 0.75rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .progress-table th {
+            background-color: var(--panel-bg);
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        /* Assignment Cards Grid */
+        .assignments-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .assignment-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 1.25rem;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+            position: relative;
+        }
+
+        .assignment-header-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .assignment-header {
+            display: inline-block;
+            background-color: #E8F5E9;
+            color: #1b5e20;
+            font-weight: 700;
+            font-size: 1rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: var(--radius-sm);
+            width: fit-content;
+        }
+
+        .question-content {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            overflow-x: auto;
+            color: var(--text-main);
+        }
+
+        [data-theme="dark"] .assignment-header {
+            background-color: #14532d;
+            color: #86efac;
+        }
+
+        .assignment-student {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: rgb(209, 234, 255);
+            color: #0c4a6e;
+            padding: 0.4rem 0.8rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.9rem;
+            font-weight: 500;
+            width: fit-content;
+        }
+
+        [data-theme="dark"] .assignment-student {
+            background-color: #1e3a8a;
+            color: #93c5fd;
+        }
+
+        .assignment-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 0.25rem;
+        }
+
+        .assignment-actions {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .status-badge {
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+        }
+
+        .status-badge.submitted {
+            background-color: var(--success-bg);
+            color: var(--success-text);
+        }
+
+        .status-badge.unsubmitted {
+            background-color: var(--panel-bg);
+            color: var(--text-muted);
+            border: 1px solid var(--border-color);
+        }
+
+        /* Modal Base */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.55);
+            backdrop-filter: blur(2px);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s ease, visibility 0.2s ease;
+            padding: 1rem;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-container {
+            background-color: var(--card-bg);
+            width: 100%;
+            max-width: 650px;
+            max-height: 90vh;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            transform: scale(0.95);
+            transition: transform 0.2s ease;
+            overflow: hidden;
+        }
+
+        .modal-overlay.active .modal-container {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .modal-close {
+            background: transparent;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            line-height: 1;
+            padding: 0.2rem;
+        }
+
+        .modal-close:hover {
+            color: var(--text-main);
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .modal-footer {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.75rem;
+            background-color: var(--panel-bg);
+        }
+
+        /* Contact Items */
+        .contact-card {
+            background-color: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .contact-info h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+
+        .contact-info p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Comment System */
+        .comments-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+            max-height: 320px;
+            overflow-y: auto;
+            padding-right: 0.25rem;
+        }
+
+        .comment-item {
+            background-color: var(--panel-bg);
+            border-radius: var(--radius-sm);
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border-color);
+            max-width: 85%;
+        }
+
+        .comment-item.my-comment {
+            align-self: flex-end;
+            background-color: var(--primary-light);
+            border-color: rgba(21, 101, 192, 0.2);
+        }
+
+        .comment-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 0.3rem;
+            gap: 1rem;
+        }
+
+        .comment-author {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .comment-text {
+            font-size: 0.9rem;
+            word-break: break-word;
+        }
+
+        /* Editor Overlay Wrapper & Textarea Styling */
+        .latex-editor-wrapper {
+            position: relative;
+            width: 100%;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            background-color: var(--card-bg);
+            overflow: hidden;
+        }
+
+        .latex-highlight-layer,
+        .latex-editor-textarea {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 0.75rem 1rem;
+            font-family: Consolas, "Courier New", monospace;
+            font-size: 0.875rem;
+            line-height: 1.6;
+            white-space: pre;
+            box-sizing: border-box;
+            tab-size: 4;
+            border: none;
+            outline: none;
+            margin: 0;
+        }
+
+        .latex-highlight-layer {
+            pointer-events: none;
+            z-index: 1;
+            color: var(--text-main);
+            background: transparent;
+            overflow: hidden;
+        }
+
+        .latex-editor-textarea {
+            z-index: 2;
+            color: transparent !important;
+            caret-color: var(--text-main);
+            background: transparent !important;
+            resize: none;
+            overflow: auto;
+        }
+
+        .latex-editor-textarea::selection {
+            background: rgba(21, 101, 192, 0.25);
+        }
+
+        [data-theme="dark"] .latex-editor-textarea::selection {
+            background: rgba(66, 165, 245, 0.35);
+        }
+
+        textarea.code-textarea {
+            font-family: Consolas, "Courier New", monospace;
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+
+        /* Toast Notifications */
+        .toast-container {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            pointer-events: none;
+        }
+
+        .toast {
+            background-color: var(--text-main);
+            color: var(--card-bg);
+            padding: 0.75rem 1.25rem;
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow-lg);
+            font-size: 0.9rem;
+            font-weight: 500;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            pointer-events: auto;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 768px) {
+            .status-bar {
+                padding: 0.6rem 1rem;
+            }
+
+            .brand-text {
+                font-size: 0.95rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .app-header {
+                padding: 1.25rem;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .modal-container {
+                max-width: 95%;
+            }
+
+            .assignment-footer {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .assignment-actions {
+                width: 100%;
+            }
+
+            .assignment-actions .btn {
+                flex: 1;
+            }
+        }
+    </style>
+    <!-- MathJax CDN -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)'], ['$','$']],
+                displayMath: [['[', ']'], ['$$','$$']]
+            },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+    <!-- ==================== STATUS BAR ==================== -->
+    <header class="status-bar">
+        <div class="brand-logo">
+            <svg viewBox="0 0 24 24">
+                <path d="M12 3L1 9l11 6l9-4.91V17h2V9L12 3z M5 13.18v4l7 3.82l7-3.82v-4L12 17L5 13.18z"/>
+            </svg>
+            <span class="brand-text">QUÂN NGUYỄN STUDY</span>
+        </div>
+        <div class="status-actions">
+            <button class="btn btn-outline-light btn-sm" id="btn-progress-trigger">
+                <span>Tiến độ</span>
+            </button>
+            <button class="btn btn-outline-light btn-sm" id="btn-contact-trigger">
+                <span>Liên hệ</span>
+            </button>
+            <button class="btn btn-outline-light btn-sm" id="btn-theme-toggle" aria-label="Toggle Dark Mode">
+                <span id="theme-icon">🌙</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- ==================== MAIN CONTENT CONTAINER ==================== -->
+    <main class="container">
+
+        <!-- VIEW 1: LOGIN SCREEN (Default if not authenticated) -->
+        <div id="login-view" class="login-wrapper">
+            <div class="login-card">
+                <h2>Đăng nhập</h2>
+                <p>Bài tập Giải tích thực một biến (MATH221A) nhóm 4</p>
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="student-id-input">Mã sinh viên</label>
+                        <input type="text" id="student-id-input" class="form-control" placeholder="Nhập mã sinh viên..." required autocomplete="off">
+                        <div id="login-error" class="error-message">
+                            Mã sinh viên không hợp lệ hoặc chưa được tham gia nhóm.
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">Đăng nhập</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- VIEW 2: DASHBOARD (Shown after authentication) -->
+        <div id="dashboard-view" style="display: none;">
+            
+            <!-- Main Header -->
+            <div class="app-header">
+                <div class="app-title">
+                    <h1>Bài tập Giải tích thực một biến (MATH221A) nhóm 4</h1>
+                    <div class="student-meta">
+                        <span id="display-student-id">Mã sinh viên: 755101235</span>
+                        <span id="display-student-name">Họ và tên: Nguyễn Hải Quân</span>
+                        <span class="badge-status">Trạng thái: Thành viên nhóm</span>
+                    </div>
+                </div>
+                <button class="btn btn-secondary btn-sm" id="btn-logout">Đăng xuất</button>
+            </div>
+
+            <!-- Section 1: Preamble -->
+            <section class="section-card">
+                <div class="section-header">
+                    <div class="section-title">1. Preamble LaTeX của nhóm</div>
+                    <button class="btn btn-primary btn-sm" id="btn-copy-preamble">Sao chép Preamble</button>
+                </div>
+
+                <div class="code-block-container">
+                    <div class="code-block-header">LaTeX Preamble Template</div>
+                    <pre class="code-block" id="preamble-code"><span class="tex-cmd">\documentclass</span><span class="tex-opt">[12pt, a4paper]</span><span class="tex-arg">{article}</span>
+<span class="tex-cmd">\usepackage</span><span class="tex-opt">[utf8]</span><span class="tex-arg">{vietnam}</span>
+<span class="tex-cmd">\usepackage</span><span class="tex-arg">{amsmath, amsthm, amssymb}</span>
+<span class="tex-cmd">\usepackage</span><span class="tex-opt">[top=2cm,bottom=2.5cm,left=1.5cm,right=1.5cm]</span><span class="tex-arg">{geometry}</span>
+<span class="tex-cmd">\usepackage</span><span class="tex-arg">{tcolorbox}</span>
+<span class="tex-cmd">\usepackage</span><span class="tex-arg">{enumitem}</span>
+
+<span class="tex-cmd">\begin</span><span class="tex-arg">{<span class="tex-env">document</span>}</span>
+
+<span class="tex-cmd">\begin</span><span class="tex-arg">{<span class="tex-env">tcolorbox</span>}</span><span class="tex-opt">[colback=white, colframe=black, title=<span class="tex-kw">\textbf</span>{Câu hỏi}]</span>
+    Nội dung câu hỏi
+<span class="tex-cmd">\end</span><span class="tex-arg">{<span class="tex-env">tcolorbox</span>}</span>
+
+Nội dung lời giải
+
+<span class="tex-kw">\vspace</span><span class="tex-arg">{0.5 cm}</span>
+
+<span class="tex-cmd">\end</span><span class="tex-arg">{<span class="tex-env">document</span>}</span></pre>
+                </div>
+
+                <div class="info-box">
+                    <strong>Lưu ý:</strong> Đây là Preamble LaTeX dùng chung cho toàn bộ bài tập của nhóm. Thành viên chỉ cần sao chép Preamble này và viết phần nội dung bài giải ở vị trí phù hợp.
+                </div>
+            </section>
+
+            <!-- Section 2: Assignments List -->
+            <section class="section-card">
+                <div class="section-header">
+                    <div class="section-title">2. Danh sách bài tập và bài nộp</div>
+                </div>
+
+                <div class="toolbar-progress">
+                    <div class="toolbar-top">
+                        <button class="btn btn-success" id="btn-generate-master">Lấy văn bản tổng</button>
+                        <div class="progress-indicator" id="progress-text">Tiến độ: 0/8 bài đã nộp</div>
+                    </div>
+                    <div class="progress-container">
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill" id="main-progress-fill" style="width: 0%;"></div>
+                        </div>
+                        <span class="progress-percent" id="main-progress-percent">0%</span>
+                    </div>
+                </div>
+
+                <div id="assignments-container" class="assignments-list">
+                    <!-- Dynamic rendering via JavaScript -->
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- ==================== MODALS ==================== -->
+
+    <!-- Modal Tiến độ bài tập nhóm -->
+    <div class="modal-overlay" id="modal-progress">
+        <div class="modal-container" style="max-width: 800px;">
+            <div class="modal-header">
+                <div class="modal-title">Tiến độ bài tập nhóm</div>
+                <button class="modal-close" data-close="modal-progress">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="progress-stats-summary">
+                    <div class="stat-card">
+                        <div class="stat-value" id="modal-progress-text">0/8</div>
+                        <div class="stat-label">Bài đã nộp</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="modal-progress-percent">0%</div>
+                        <div class="stat-label">Tỷ lệ hoàn thành</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="modal-unsubmitted-count">8</div>
+                        <div class="stat-label">Bài chưa nộp</div>
+                    </div>
+                </div>
+                
+                <div class="progress-container" style="margin-bottom: 1.25rem;">
+                    <div class="progress-bar-bg" style="height: 12px;">
+                        <div class="progress-bar-fill" id="modal-progress-fill" style="width: 0%;"></div>
+                    </div>
+                </div>
+
+                <div class="progress-table-wrapper">
+                    <table class="progress-table">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Bài</th>
+                                <th>Trạng thái</th>
+                                <th>Người nộp</th>
+                                <th>MSV</th>
+                                <th>Thời gian nộp</th>
+                                <th>Cập nhật cuối</th>
+                            </tr>
+                        </thead>
+                        <tbody id="progress-table-body">
+                            <!-- Render dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-close="modal-progress">Đóng</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 0: Question Modal -->
+    <div class="modal-overlay" id="modal-question">
+        <div class="modal-container">
+            <div class="modal-header">
+                <div class="modal-title" id="question-modal-title">Đề bài - Bài 1</div>
+                <button class="modal-close" data-close="modal-question">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="question-content" id="question-modal-body">
+                    <!-- Nội dung đề bài render động -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-close="modal-question">Đóng</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 1: Contact Modal -->
+    <div class="modal-overlay" id="modal-contact">
+        <div class="modal-container">
+            <div class="modal-header">
+                <div class="modal-title">Liên hệ</div>
+                <button class="modal-close" data-close="modal-contact">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="contact-card">
+                    <div class="contact-info">
+                        <h4>Trưởng nhóm</h4>
+                        <p>Nguyễn Thành Trung</p>
+                    </div>
+                    <a href="https://zalo.me/0355748108" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Mở Zalo</a>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-info">
+                        <h4>Lập trình viên</h4>
+                        <p>Nguyễn Hải Quân</p>
+                    </div>
+                    <a href="https://zalo.me/0355748108" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Mở Zalo</a>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-close="modal-contact">Đóng</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 2: Submit Modal -->
+    <div class="modal-overlay" id="modal-submit">
+        <div class="modal-container">
+            <div class="modal-header">
+                <div class="modal-title" id="submit-modal-title">Nộp bài - Bài 1</div>
+                <button class="modal-close" data-close="modal-submit">&times;</button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="submit-assignment-id">
+                
+                <div class="form-group">
+                    <label for="submit-overleaf-url">Link Overleaf</label>
+                    <input type="url" id="submit-overleaf-url" class="form-control" placeholder="Dán link Overleaf của bài làm tại đây...">
+                    <small style="color: var(--text-muted); font-size: 0.8rem; margin-top: 0.25rem; display: block;">
+                        Vui lòng gửi link Overleaf để các thành viên có thể kiểm tra và chỉnh sửa bài làm.
+                    </small>
+                </div>
+
+                <div class="form-group">
+                    <label for="submit-latex-content">Nội dung chính của bài giải</label>
+                    <div class="latex-editor-wrapper" style="height: 220px;">
+                        <div class="latex-highlight-layer" id="submit-latex-highlight" aria-hidden="true"></div>
+                        <textarea id="submit-latex-content" class="form-control code-textarea latex-editor-textarea" placeholder="Dán phần nội dung LaTeX của bài giải vào đây..."></textarea>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <strong>⚠️ LƯU Ý QUAN TRỌNG:</strong><br>
+                    Chỉ nhập phần văn bản NỘI DUNG của bài giải.<br>
+                    <strong>KHÔNG nhập:</strong><br>
+                    <code>\documentclass{...}</code><br>
+                    <code>\usepackage{...}</code><br>
+                    <code>\begin{document}</code><br>
+                    <code>\end{document}</code><br><br>
+                    Bạn chỉ cần nhập phần nằm GIỮA <code>\begin{document}</code> và <code>\end{document}</code>.<br><br>
+                    <em>Ví dụ:</em> Nếu bài hoàn chỉnh là:<br>
+                    <code>\begin{document}</code><br>
+                    <code>Nội dung bài 1...</code><br>
+                    <code>\end{document}</code><br>
+                    thì trong ô này <strong>CHỈ nhập:</strong><br>
+                    <code>Nội dung bài 1...</code><br><br>
+                    Preamble và các lệnh <code>\begin{document}</code>, <code>\end{document}</code> sẽ được hệ thống tự động ghép khi sử dụng chức năng "Lấy văn bản tổng".
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-close="modal-submit">Hủy</button>
+                <button class="btn btn-primary" id="btn-save-submission">Lưu bài nộp</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 3: Detail Modal -->
+    <div class="modal-overlay" id="modal-detail">
+        <div class="modal-container">
+            <div class="modal-header">
+                <div class="modal-title" id="detail-modal-title">Chi tiết bài nộp</div>
+                <button class="modal-close" data-close="modal-detail">&times;</button>
+            </div>
+            <div class="modal-body" id="detail-modal-body">
+                <!-- Dynamically populated -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-close="modal-detail">Đóng</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 4: Comment Modal -->
+    <div class="modal-overlay" id="modal-comment">
+        <div class="modal-container">
+            <div class="modal-header">
+                <div class="modal-title" id="comment-modal-title">Comment - Bài 1</div>
+                <button class="modal-close" data-close="modal-comment">&times;</button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="comment-assignment-id">
+                <div class="comments-list" id="comments-history">
+                    <!-- Dynamic comments list -->
+                </div>
+                <div class="form-group" style="margin-top: 0.5rem;">
+                    <textarea id="comment-input" class="form-control" rows="3" placeholder="Nhập góp ý..."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-close="modal-comment">Đóng</button>
+                <button class="btn btn-primary" id="btn-send-comment">Gửi</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 5: Unsubmitted Warning Confirmation -->
+    <div class="modal-overlay" id="modal-warning">
+        <div class="modal-container" style="max-width: 480px;">
+            <div class="modal-header">
+                <div class="modal-title">Cảnh báo chưa hoàn thành</div>
+                <button class="modal-close" data-close="modal-warning">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p id="warning-modal-text">Một số bài chưa có nội dung. Bạn có muốn tiếp tục tạo văn bản tổng không?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-close="modal-warning">Hủy</button>
+                <button class="btn btn-primary" id="btn-confirm-continue-master">Tiếp tục</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 6: Master LaTeX Result -->
+    <div class="modal-overlay" id="modal-master-result">
+        <div class="modal-container" style="max-width: 800px;">
+            <div class="modal-header">
+                <div class="modal-title">Văn bản LaTeX tổng</div>
+                <button class="modal-close" data-close="modal-master-result">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="latex-editor-wrapper" style="height: 380px;">
+                    <div class="latex-highlight-layer" id="master-latex-highlight" aria-hidden="true"></div>
+                    <textarea id="master-latex-output" class="form-control code-textarea latex-editor-textarea" style="height: 100%;" readonly></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="btn-copy-master">Sao chép toàn bộ</button>
+                <button class="btn btn-primary" id="btn-download-tex">Tải xuống .tex</button>
+                <button class="btn btn-secondary" data-close="modal-master-result">Đóng</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification Holder -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- ==================== JAVASCRIPT LOGIC ==================== -->
+    <script>
+        // ==================== LATEX SYNTAX HIGHLIGHTER ====================
+        function highlightLatexInner(source) {
+            if (!source) return "";
+            const tokenRegex = /(%.*)|(\\begin\{[a-zA-Z0-9*]+\}|\\end\{[a-zA-Z0-9*]+\})|(\\[a-zA-Z@]+[*]?)\vert{}(\[[^\]\r\n]*\])|(\$[^$\r\n]+?\$|\\\[[\s\S]*?\\\]|\\\([\s\S]*?\\\))|(\{[\s\S]*?\})/g;
+
+            let result = "";
+            let lastIndex = 0;
+            let match;
+
+            while ((match = tokenRegex.exec(source)) !== null) {
+                if (match.index > lastIndex) {
+                    result += escapeHtml(source.substring(lastIndex, match.index));
+                }
+                const [fullMatch, comment, envToken, cmd, opt, math, arg] = match;
+
+                if (comment) {
+                    result += `<span class="latex-comment">${escapeHtml(comment)}</span>`;
+                } else if (envToken) {
+                    const isBegin = envToken.startsWith("\\begin");
+                    const cmdName = isBegin ? "\\begin" : "\\end";
+                    const envName = envToken.slice(cmdName.length + 1, -1);
+                    result += `<span class="latex-cmd">${cmdName}</span><span class="latex-bracket">{</span><span class="latex-env">${escapeHtml(envName)}</span><span class="latex-bracket">}</span>`;
+                } else if (cmd) {
+                    result += `<span class="latex-cmd">${escapeHtml(cmd)}</span>`;
+                } else if (opt) {
+                    const optContent = opt.slice(1, -1);
+                    if (optContent.includes("\\")) {
+                        result += `<span class="latex-bracket">[</span><span class="latex-opt">${highlightLatexInner(optContent)}</span><span class="latex-bracket">]</span>`;
+                    } else {
+                        result += `<span class="latex-bracket">[</span><span class="latex-opt">${escapeHtml(optContent)}</span><span class="latex-bracket">]</span>`;
+                    }
+                } else if (math) {
+                    result += `<span class="latex-math">${escapeHtml(math)}</span>`;
+                } else if (arg) {
+                    const argContent = arg.slice(1, -1);
+                    if (argContent.includes("\\")) {
+                        result += `<span class="latex-bracket">{</span><span class="latex-arg">${highlightLatexInner(argContent)}</span><span class="latex-bracket">}</span>`;
+                    } else {
+                        result += `<span class="latex-bracket">{</span><span class="latex-arg">${escapeHtml(argContent)}</span><span class="latex-bracket">}</span>`;
+                    }
+                }
+                lastIndex = tokenRegex.lastIndex;
+            }
+
+            if (lastIndex < source.length) {
+                result += escapeHtml(source.substring(lastIndex));
+            }
+            return result;
+        }
+
+        function highlightLatex(source) {
+            if (!source) return "";
+            return highlightLatexInner(source);
+        }
+
+        function updateEditorHighlight(textarea, highlightId) {
+            const highlightLayer = typeof highlightId === "string" ? document.getElementById(highlightId) : highlightId;
+            if (!textarea || !highlightLayer) return;
+
+            const val = textarea.value;
+            highlightLayer.innerHTML = highlightLatex(val) + (val.endsWith('\n') ? '<br>&nbsp;' : '');
+            highlightLayer.scrollTop = textarea.scrollTop;
+            highlightLayer.scrollLeft = textarea.scrollLeft;
+        }
+
+        function setupEditorOverlaySync(textareaId, highlightId) {
+            const textarea = document.getElementById(textareaId);
+            const highlight = document.getElementById(highlightId);
+            if (!textarea || !highlight) return;
+
+            const sync = () => updateEditorHighlight(textarea, highlight);
+
+            textarea.addEventListener("input", sync);
+            textarea.addEventListener("scroll", () => {
+                highlight.scrollTop = textarea.scrollTop;
+                highlight.scrollLeft = textarea.scrollLeft;
+            });
+        }
+        const GROUP_MEMBERS = {
+            "755101229": { id: "755101229", name: "Mai Duy Quang" },
+            "755101231": { id: "755101231", name: "Vũ Duy Quang" },
+            "755101235": { id: "755101235", name: "Nguyễn Hải Quân" },
+            "755101245": { id: "755101245", name: "Nguyễn Thị Thanh Tâm" },
+            "755101253": { id: "755101253", name: "Nguyễn Phương Thảo" },
+            "755101276": { id: "755101276", name: "Hoàng Thùy Trang" },
+            "755101277": { id: "755101277", name: "Lê Huyền Trang" },
+            "755101292": { id: "755101292", name: "Nguyễn Thành Trung" },
+            "755101297": { id: "755101297", name: "Vũ Anh Tuấn" },
+            "755101307": { id: "755101307", name: "Nguyễn Quốc Vũ" }
+        };
+
+        const CONFIG = {
+            PREAMBLE: `\\documentclass[12pt, a4paper]{article}
+\\usepackage[utf8]{vietnam}
+\\usepackage{amsmath, amsthm, amssymb}
+\\usepackage[top=2cm,bottom=2.5cm,left=1.5cm,right=1.5cm]{geometry}
+\\usepackage{tcolorbox}
+\\usepackage{enumitem}
+
+\\begin{document}
+
+\\begin{tcolorbox}[colback=white, colframe=black, title=\\textbf{Câu hỏi}]
+    Nội dung câu hỏi
+\\end{tcolorbox}
+
+Nội dung lời giải
+
+\\vspace{0.5 cm}
+
+\\end{document}`,
+            LOCAL_STORAGE_KEYS: {
+                AUTH: "math221_auth_user",
+                THEME: "math221_theme",
+                ASSIGNMENTS: "math221_assignments_data",
+                COMMENTS: "math221_comments_data"
+            }
+        };
+
+        function formatDateTime(dateStr) {
+            if (!dateStr) return "—";
+            if (/^\d{2}\/\d{2}\/\d{4} \d{2}:\d{2}:\d{2}$/.test(String(dateStr))) return String(dateStr); // giờ VN do backend tạo
+            const d = new Date(dateStr);
+            if (isNaN(d.getTime())) return dateStr;
+            return `${padZero(d.getDate())}/${padZero(d.getMonth() + 1)}/${d.getFullYear()} ${padZero(d.getHours())}:${padZero(d.getMinutes())}:${padZero(d.getSeconds())}`;
+        }
+
+        // ==================== QUESTION BANK & MOCK DATA ====================
+        const QUESTION_BANK = {
+            1: `<p>Chưa cập nhật đề bài cho Bài 1.</p>`,
+            2: `<p>Chưa cập nhật đề bài cho Bài 2.</p>`,
+            11: `<p>Chưa cập nhật đề bài cho Bài 11.</p>`,
+            12: `<p>Chưa cập nhật đề bài cho Bài 12.</p>`,
+            14: `<p>Chưa cập nhật đề bài cho Bài 14.</p>`,
+            16: `<p>Chưa cập nhật đề bài cho Bài 16.</p>`,
+            20: `<p>Chưa cập nhật đề bài cho Bài 20.</p>`,
+            22: `<p>Chưa cập nhật đề bài cho Bài 22.</p>`
+        };
+
+        const INITIAL_ASSIGNMENTS = [
+            { id: 1, title: "Bài 1", student: "Thành viên nhóm", questionHtml: QUESTION_BANK[1], overleafUrl: "", latexContent: "", isSubmitted: false, submittedById: null, submittedByName: null, submittedAt: null, updatedById: null, updatedByName: null, updatedAt: null },
+            { id: 2, title: "Bài 2", student: "Thành viên nhóm", questionHtml: QUESTION_BANK[2], overleafUrl: "", latexContent: "", isSubmitted: false, submittedById: null, submittedByName: null, submittedAt: null, updatedById: null, updatedByName: null, updatedAt: null },
+            { id: 11, title: "Bài 11", student: "Thành viên nhóm", questionHtml: QUESTION_BANK[11], overleafUrl: "", latexContent: "", isSubmitted: false, submittedById: null, submittedByName: null, submittedAt: null, updatedById: null, updatedByName: null, updatedAt: null },
+            { id: 12, title: "Bài 12", student: "Thành viên nhóm", questionHtml: QUESTION_BANK[12], overleafUrl: "", latexContent: "", isSubmitted: false, submittedById: null, submittedByName: null, submittedAt: null, updatedById: null, updatedByName: null, updatedAt: null },
+            { id: 14, title: "Bài 14", student: "Thành viên nhóm", questionHtml: QUESTION_BANK[14], overleafUrl: "", latexContent: "", isSubmitted: false, submittedById: null, submittedByName: null, submittedAt: null, updatedById: null, updatedByName: null, updatedAt: null },
+            { id: 16, title: "Bài 16", student: "Thành viên nhóm", questionHtml: QUESTION_BANK[16], overleafUrl: "", latexContent: "", isSubmitted: false, submittedById: null, submittedByName: null, submittedAt: null, updatedById: null, updatedByName: null, updatedAt: null },
+            { id: 20, title: "Bài 20", student: "Thành viên nhóm", questionHtml: QUESTION_BANK[20], overleafUrl: "", latexContent: "", isSubmitted: false, submittedById: null, submittedByName: null, submittedAt: null, updatedById: null, updatedByName: null, updatedAt: null },
+            { id: 22, title: "Bài 22", student: "Thành viên nhóm", questionHtml: QUESTION_BANK[22], overleafUrl: "", latexContent: "", isSubmitted: false, submittedById: null, submittedByName: null, submittedAt: null, updatedById: null, updatedByName: null, updatedAt: null }
+        ];
+
+        const INITIAL_COMMENTS = {};
+
+        // State Store
+        let state = {
+            currentUser: null, // Lưu { id: "755101235", name: "Nguyễn Hải Quân" }
+            theme: "light",
+            assignments: [],
+            comments: {}
+        };
+
+        // ==================== LOCAL STORAGE ====================
+        function initLocalStorage() {
+            // Auth Migration & Load
+            const savedUser = localStorage.getItem(CONFIG.LOCAL_STORAGE_KEYS.AUTH);
+            if (savedUser) {
+                try {
+                    if (savedUser.startsWith("{")) {
+                        const parsedUser = JSON.parse(savedUser);
+                        if (parsedUser && GROUP_MEMBERS[parsedUser.id]) {
+                            state.currentUser = GROUP_MEMBERS[parsedUser.id];
+                        }
+                    } else if (GROUP_MEMBERS[savedUser]) {
+                        state.currentUser = GROUP_MEMBERS[savedUser];
+                    }
+                } catch (e) {
+                    if (GROUP_MEMBERS[savedUser]) {
+                        state.currentUser = GROUP_MEMBERS[savedUser];
+                    }
+                }
+            }
+
+            // Theme
+            const savedTheme = localStorage.getItem(CONFIG.LOCAL_STORAGE_KEYS.THEME) || "light";
+            state.theme = savedTheme;
+            applyTheme(savedTheme);
+
+            // Assignments Migration
+            const savedAssignments = localStorage.getItem(CONFIG.LOCAL_STORAGE_KEYS.ASSIGNMENTS);
+            if (savedAssignments) {
+                try {
+                    const parsed = JSON.parse(savedAssignments);
+                    const savedMap = new Map(parsed.map(item => [item.id, item]));
+                    
+                    state.assignments = INITIAL_ASSIGNMENTS.map(initItem => {
+                        const existing = savedMap.get(initItem.id);
+                        if (existing) {
+                            return {
+                                ...initItem,
+                                student: existing.student || initItem.student,
+                                overleafUrl: existing.overleafUrl || "",
+                                latexContent: existing.latexContent || "",
+                                isSubmitted: !!existing.isSubmitted,
+                                submittedById: existing.submittedById || null,
+                                submittedByName: existing.submittedByName || null,
+                                submittedAt: existing.submittedAt || null,
+                                updatedById: existing.updatedById || null,
+                                updatedByName: existing.updatedByName || null,
+                                updatedAt: existing.updatedAt || null
+                            };
+                        }
+                        return { ...initItem };
+                    });
+                    saveAssignmentsToStorage();
+                } catch (e) {
+                    state.assignments = [...INITIAL_ASSIGNMENTS];
+                    saveAssignmentsToStorage();
+                }
+            } else {
+                state.assignments = [...INITIAL_ASSIGNMENTS];
+                saveAssignmentsToStorage();
+            }
+
+            // Comments Migration
+            const savedComments = localStorage.getItem(CONFIG.LOCAL_STORAGE_KEYS.COMMENTS);
+            if (savedComments) {
+                try {
+                    const parsedComments = JSON.parse(savedComments);
+                    state.comments = {};
+                    Object.keys(parsedComments).forEach(key => {
+                        state.comments[key] = (parsedComments[key] || []).map((c, idx) => {
+                            if (c.authorId && c.authorName) {
+                                return c;
+                            }
+                            let authorId = "";
+                            let authorName = c.author || "Thành viên";
+                            if (c.author && c.author.includes("755101235")) authorId = "755101235";
+                            return {
+                                id: c.id || `c_${key}_${idx}_${Date.now()}`,
+                                assignmentId: parseInt(key, 10),
+                                authorId: authorId,
+                                authorName: authorName,
+                                text: c.text || "",
+                                createdAt: c.createdAt || (c.timestamp ? c.timestamp : new Date().toISOString()),
+                                updatedAt: c.updatedAt || null
+                            };
+                        });
+                    });
+                } catch (e) {
+                    state.comments = {};
+                }
+            } else {
+                state.comments = {};
+                saveCommentsToStorage();
+            }
+        }
+
+        function saveAssignmentsToStorage() {
+            localStorage.setItem(CONFIG.LOCAL_STORAGE_KEYS.ASSIGNMENTS, JSON.stringify(state.assignments));
+        }
+
+        function saveCommentsToStorage() {
+            localStorage.setItem(CONFIG.LOCAL_STORAGE_KEYS.COMMENTS, JSON.stringify(state.comments));
+        }
+
+        // ==================== AUTHENTICATION ====================
+        function loginStudentOld_(studentId) {
+            const cleanId = studentId.trim();
+            if (GROUP_MEMBERS[cleanId]) {
+                state.currentUser = GROUP_MEMBERS[cleanId];
+                localStorage.setItem(CONFIG.LOCAL_STORAGE_KEYS.AUTH, JSON.stringify(state.currentUser));
+                renderAppView();
+                showToast(`Xin chào ${state.currentUser.name}! Đăng nhập thành công.`);
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        function logoutStudent() {
+            state.currentUser = null;
+            localStorage.removeItem(CONFIG.LOCAL_STORAGE_KEYS.AUTH);
+            renderAppView();
+            showToast("Đã đăng xuất.");
+        }
+
+        
+        // ==================== DARK MODE ====================
+        function toggleDarkMode() {
+            state.theme = state.theme === "light" ? "dark" : "light";
+            localStorage.setItem(CONFIG.LOCAL_STORAGE_KEYS.THEME, state.theme);
+            applyTheme(state.theme);
+        }
+
+        function applyTheme(theme) {
+            document.documentElement.setAttribute("data-theme", theme);
+            const icon = document.getElementById("theme-icon");
+            if (icon) {
+                icon.textContent = theme === "light" ? "🌙" : "☀️";
+            }
+        }
+
+        // ==================== TOAST NOTIFICATION ====================
+        function showToast(message) {
+            const container = document.getElementById("toast-container");
+            const toast = document.createElement("div");
+            toast.className = "toast";
+            toast.textContent = message;
+
+            container.appendChild(toast);
+
+            // Trigger animation
+            setTimeout(() => toast.classList.add("show"), 10);
+
+            setTimeout(() => {
+                toast.classList.remove("show");
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // ==================== PROGRESS CALCULATION & UI ====================
+        function calculateProgress() {
+            const total = state.assignments.length;
+            if (total === 0) return { submittedCount: 0, total: 0, percent: 0 };
+            const submittedCount = state.assignments.filter(a => a.isSubmitted).length;
+            const percentVal = ((submittedCount / total) * 100).toFixed(1);
+            return {
+                submittedCount,
+                total,
+                percent: percentVal.endsWith('.0') ? parseInt(percentVal, 10) : parseFloat(percentVal)
+            };
+        }
+
+        function updateProgressUI() {
+            const p = calculateProgress();
+            
+            const progressText = document.getElementById("progress-text");
+            const mainFill = document.getElementById("main-progress-fill");
+            const mainPercent = document.getElementById("main-progress-percent");
+
+            if (progressText) progressText.textContent = `Tiến độ: ${p.submittedCount}/${p.total} bài đã nộp`;
+            if (mainFill) mainFill.style.width = `${p.percent}%`;
+            if (mainPercent) mainPercent.textContent = `${p.percent}%`;
+        }
+
+        function openProgressModal() {
+            const p = calculateProgress();
+            
+            const textEl = document.getElementById("modal-progress-text");
+            const percentEl = document.getElementById("modal-progress-percent");
+            const unsubEl = document.getElementById("modal-unsubmitted-count");
+            const fillEl = document.getElementById("modal-progress-fill");
+
+            if (textEl) textEl.textContent = `${p.submittedCount}/${p.total}`;
+            if (percentEl) percentEl.textContent = `${p.percent}%`;
+            if (unsubEl) unsubEl.textContent = p.total - p.submittedCount;
+            if (fillEl) fillEl.style.width = `${p.percent}%`;
+
+            const tbody = document.getElementById("progress-table-body");
+            if (tbody) {
+                tbody.innerHTML = "";
+                state.assignments.forEach((item, index) => {
+                    const tr = document.createElement("tr");
+                    const isSub = item.isSubmitted;
+                    const statusBadge = isSub ? 
+                        `<span class="status-badge submitted">Đã nộp</span>` : 
+                        `<span class="status-badge unsubmitted">Chưa nộp</span>`;
+
+                    const subName = item.submittedByName || "—";
+                    const subId = item.submittedById || "—";
+                    const subTime = item.submittedAt ? formatDateTime(item.submittedAt) : "—";
+                    const updatedTime = item.updatedAt ? formatDateTime(item.updatedAt) : "—";
+
+                    tr.innerHTML = `
+                        <td>${index + 1}</td>
+                        <td><strong>${item.title}</strong></td>
+                        <td>${statusBadge}</td>
+                        <td>${subName}</td>
+                        <td>${subId}</td>
+                        <td>${subTime}</td>
+                        <td>${updatedTime}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            }
+
+            openModal("modal-progress");
+        }
+
+        // ==================== RENDER ASSIGNMENTS ====================
+        function renderAssignments() {
+            const container = document.getElementById("assignments-container");
+            container.innerHTML = "";
+
+            state.assignments.forEach(item => {
+                const card = document.createElement("div");
+                card.className = "assignment-card";
+
+                let metaHtml = "";
+                if (item.isSubmitted) {
+                    let lastUpdateInfo = "";
+                    if (item.updatedAt && item.updatedAt !== item.submittedAt) {
+                        const updaterName = item.updatedByName || item.submittedByName || "Thành viên";
+                        const updaterId = item.updatedById || item.submittedById || "—";
+                        lastUpdateInfo = `
+                            <div class="submission-meta-item">
+                                <strong>Lưu thay đổi lần cuối:</strong> ${updaterName} (${updaterId}) - ${formatDateTime(item.updatedAt)}
+                            </div>`;
+                    }
+
+                    const submitterName = item.submittedByName || "Thành viên";
+                    const submitterId = item.submittedById || "—";
+
+                    metaHtml = `
+                        <div class="submission-meta">
+                            <div class="submission-meta-item">
+                                <strong>Đã nộp bởi:</strong> ${submitterName} (${submitterId})
+                            </div>
+                            <div class="submission-meta-item">
+                                <strong>Thời gian nộp:</strong> ${formatDateTime(item.submittedAt)}
+                            </div>
+                            ${lastUpdateInfo}
+                        </div>`;
+                }
+
+                card.innerHTML = `
+                    <div class="assignment-header-row">
+                        <div class="assignment-header">${item.title}</div>
+                        <button class="btn btn-secondary btn-sm" onclick="openQuestionModal(${item.id})">Xem đề bài</button>
+                    </div>
+                    <div class="assignment-student">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                        </svg>
+                        Sinh viên thực hiện: ${item.student}
+                    </div>
+                    ${metaHtml}
+                    <div class="assignment-footer">
+                        <div class="assignment-actions">
+                            <button class="btn btn-primary btn-sm" onclick="openSubmissionModal(${item.id})">Nộp bài</button>
+                            <button class="btn btn-secondary btn-sm" onclick="openDetailModal(${item.id})">Chi tiết</button>
+                            <button class="btn btn-secondary btn-sm" onclick="openCommentModal(${item.id})">Comment</button>
+                        </div>
+                        <span class="status-badge ${item.isSubmitted ? 'submitted' : 'unsubmitted'}">
+                            ${item.isSubmitted ? 'Đã nộp' : 'Chưa nộp'}
+                        </span>
+                    </div>
+                `;
+
+                container.appendChild(card);
+            });
+
+            updateProgressUI();
+        }
+
+        // ==================== QUESTION MODAL ====================
+        function openQuestionModal(assignmentId) {
+            const assignment = state.assignments.find(a => a.id === assignmentId);
+            const modalTitle = document.getElementById("question-modal-title");
+            const modalBody = document.getElementById("question-modal-body");
+
+            if (!assignment) return;
+
+            modalTitle.textContent = `Đề bài - ${assignment.title}`;
+            const qContent = assignment.questionHtml || (typeof QUESTION_BANK !== 'undefined' ? QUESTION_BANK[assignmentId] : null);
+
+            if (qContent && qContent.trim()) {
+                modalBody.innerHTML = qContent;
+            } else {
+                modalBody.innerHTML = `<p style="color: var(--text-muted);">Chưa cập nhật đề bài cho bài tập này.</p>`;
+            }
+
+            openModal("modal-question");
+
+            if (window.MathJax && typeof window.MathJax.typesetPromise === "function") {
+                window.MathJax.typesetPromise([modalBody]).catch(err => console.log(err));
+            }
+        }
+
+        // ==================== SUBMISSION ====================
+        function openSubmissionModal(assignmentId) {
+            const assignment = state.assignments.find(a => a.id === assignmentId);
+            if (!assignment) return;
+
+            document.getElementById("submit-assignment-id").value = assignment.id;
+            document.getElementById("submit-modal-title").textContent = `Nộp bài - ${assignment.title}`;
+            document.getElementById("submit-overleaf-url").value = assignment.overleafUrl || "";
+
+            const submitInput = document.getElementById("submit-latex-content");
+            submitInput.value = assignment.latexContent || "";
+            updateEditorHighlight(submitInput, "submit-latex-highlight");
+
+            openModal("modal-submit");
+        }
+
+        function saveSubmissionOld_() {
+            const id = parseInt(document.getElementById("submit-assignment-id").value, 10);
+            const overleafUrl = document.getElementById("submit-overleaf-url").value.trim();
+            const latexContent = document.getElementById("submit-latex-content").value.trim();
+
+            const index = state.assignments.findIndex(a => a.id === id);
+            if (index !== -1) {
+                const target = state.assignments[index];
+                const nowIso = new Date().toISOString();
+                const isFirstSubmission = !target.isSubmitted || !target.submittedAt;
+
+                target.overleafUrl = overleafUrl;
+                target.latexContent = latexContent;
+                target.isSubmitted = !!(overleafUrl || latexContent);
+
+                if (target.isSubmitted) {
+                    if (isFirstSubmission) {
+                        target.submittedById = state.currentUser ? state.currentUser.id : "755101235";
+                        target.submittedByName = state.currentUser ? state.currentUser.name : "Thành viên";
+                        target.submittedAt = nowIso;
+                        target.updatedById = state.currentUser ? state.currentUser.id : "755101235";
+                        target.updatedByName = state.currentUser ? state.currentUser.name : "Thành viên";
+                        target.updatedAt = nowIso;
+                    } else {
+                        target.updatedById = state.currentUser ? state.currentUser.id : "755101235";
+                        target.updatedByName = state.currentUser ? state.currentUser.name : "Thành viên";
+                        target.updatedAt = nowIso;
+                    }
+                }
+
+                saveAssignmentsToStorage();
+                renderAssignments();
+                closeModal("modal-submit");
+                showToast("Đã lưu bài nộp.");
+            }
+        }
+
+        // ==================== DETAIL MODAL ====================
+        function renderDetailModal_(assignmentId) {
+            const assignment = state.assignments.find(a => a.id === assignmentId);
+            if (!assignment) return;
+
+            document.getElementById("detail-modal-title").textContent = `Chi tiết - ${assignment.title}`;
+            const body = document.getElementById("detail-modal-body");
+
+            if (!assignment.isSubmitted) {
+                body.innerHTML = `<p style="color: var(--text-muted);">Chưa có bài nộp.</p>`;
+            } else {
+                let updateInfoHtml = "";
+                if (assignment.updatedAt && assignment.updatedAt !== assignment.submittedAt) {
+                    updateInfoHtml = `
+                        <p><strong>Lần lưu thay đổi cuối:</strong> ${assignment.updatedByName || ''} (MSV: ${assignment.updatedById || '—'})</p>
+                        <p><strong>Thời gian cập nhật:</strong> ${formatDateTime(assignment.updatedAt)}</p>
+                    `;
+                }
+
+                body.innerHTML = `
+                    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                        <p><strong>Bài:</strong> ${assignment.title}</p>
+                        <p><strong>Sinh viên thực hiện:</strong> ${assignment.student}</p>
+                        <p><strong>Trạng thái:</strong> <span class="status-badge submitted">Đã nộp</span></p>
+                        <p><strong>Người nộp:</strong> ${assignment.submittedByName || 'Thành viên'} (MSV: ${assignment.submittedById || '—'})</p>
+                        <p><strong>Thời gian nộp:</strong> ${formatDateTime(assignment.submittedAt)}</p>
+                        ${updateInfoHtml}
+                        ${assignment.overleafUrl ? `
+                            <div style="margin-top: 0.5rem;">
+                                <strong>Link Overleaf:</strong><br>
+                                <a href="${assignment.overleafUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="margin-top: 0.25rem;">
+                                    Mở Overleaf ↗
+                                </a>
+                            </div>
+                        ` : '<p><em>Không có link Overleaf.</em></p>'}
+                        <div style="margin-top: 0.5rem;">
+                            <strong>Nội dung LaTeX:</strong>
+                            <div class="code-block-container" style="margin-top: 0.4rem; max-height: 250px; overflow: auto;">
+                                <pre class="code-block" style="margin: 0; padding: 0.85rem 1rem; user-select: text;">${highlightLatex(assignment.latexContent || "Chưa nhập nội dung LaTeX.")}</pre>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            openModal("modal-detail");
+        }
+
+        // ==================== COMMENTS ====================
+        function showCommentModal_(assignmentId) {
+            const assignment = state.assignments.find(a => a.id === assignmentId);
+            if (!assignment) return;
+
+            document.getElementById("comment-assignment-id").value = assignment.id;
+            document.getElementById("comment-modal-title").textContent = `Comment - ${assignment.title}`;
+            document.getElementById("comment-input").value = "";
+
+            renderCommentsList(assignment.id);
+            openModal("modal-comment");
+        }
+
+        function renderCommentsList(assignmentId) {
+            const container = document.getElementById("comments-history");
+            container.innerHTML = "";
+
+            const comments = state.comments[assignmentId] || [];
+
+            if (comments.length === 0) {
+                container.innerHTML = `<p style="color: var(--text-muted); font-size: 0.875rem;">Chưa có comment nào cho bài này.</p>`;
+                return;
+            }
+
+            comments.forEach(c => {
+                const isMyComment = state.currentUser && (c.authorId === state.currentUser.id);
+                const item = document.createElement("div");
+                item.className = `comment-item ${isMyComment ? 'my-comment' : ''}`;
+                
+                const authorDisplay = c.authorName || c.author || "Thành viên";
+                const msvDisplay = c.authorId ? `MSV: ${c.authorId}` : "";
+                const timeDisplay = formatDateTime(c.createdAt || c.timestamp);
+
+                item.innerHTML = `
+                    <div class="comment-meta">
+                        <div>
+                            <span class="comment-author">${escapeHtml(authorDisplay)}</span>
+                            ${msvDisplay ? `<span style="font-size: 0.75rem; color: var(--text-muted); margin-left: 0.4rem;">(${escapeHtml(msvDisplay)})</span>` : ''}
+                        </div>
+                        <span style="font-size: 0.75rem; color: var(--text-muted);">${timeDisplay}</span>
+                    </div>
+                    <div class="comment-text">${escapeHtml(c.text)}</div>
+                `;
+                container.appendChild(item);
+            });
+
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function addCommentOld_() {
+            const assignmentId = parseInt(document.getElementById("comment-assignment-id").value, 10);
+            const input = document.getElementById("comment-input");
+            const text = input.value.trim();
+
+            if (!text || !state.currentUser) return;
+
+            if (!state.comments[assignmentId]) {
+                state.comments[assignmentId] = [];
+            }
+
+            const nowIso = new Date().toISOString();
+
+            state.comments[assignmentId].push({
+                id: `c_${assignmentId}_${Date.now()}`,
+                assignmentId: assignmentId,
+                authorId: state.currentUser.id,
+                authorName: state.currentUser.name,
+                text: text,
+                createdAt: nowIso,
+                updatedAt: null
+            });
+
+            saveCommentsToStorage();
+            input.value = "";
+            renderCommentsList(assignmentId);
+            showToast("Comment đã được gửi.");
+        }
+
+        // ==================== LATEX GENERATION ====================
+        function handleGenerateMasterClickLocal_() {
+            const unsubmitted = state.assignments.filter(a => !a.isSubmitted || !a.latexContent.trim());
+
+            if (unsubmitted.length > 0) {
+                const unsubmittedTitles = unsubmitted.map(a => a.title).join(", ");
+                document.getElementById("warning-modal-text").textContent = 
+                    `${unsubmittedTitles} chưa có nội dung. Bạn có muốn tiếp tục tạo văn bản tổng không?`;
+                openModal("modal-warning");
+            } else {
+                generateFullLatex();
+            }
+        }
+
+        function generateFullLatex() {
+            closeModal("modal-warning");
+
+            // Build Preamble Header (Up to \begin{document})
+            const preambleLines = CONFIG.PREAMBLE.split("\n");
+            const beginDocIndex = preambleLines.findIndex(line => line.includes("\\begin{document}"));
+            
+            let preamblePart = CONFIG.PREAMBLE;
+            if (beginDocIndex !== -1) {
+                preamblePart = preambleLines.slice(0, beginDocIndex).join("\n").trim();
+            }
+
+            let fullBody = "";
+
+            state.assignments.forEach(item => {
+                if (item.latexContent && item.latexContent.trim()) {
+                    fullBody += `% ==================== ${item.title.toUpperCase()} ====================\n`;
+                    fullBody += `% Sinh viên thực hiện: ${item.student}\n\n`;
+                    fullBody += item.latexContent.trim() + "\n\n";
+                }
+            });
+
+            const masterLatex = `${preamblePart}\n\n\\begin{document}\n\n${fullBody.trim()}\n\n\\end{document}`;
+
+            const masterOutputEl = document.getElementById("master-latex-output");
+            masterOutputEl.value = masterLatex;
+            updateEditorHighlight(masterOutputEl, "master-latex-highlight");
+
+            openModal("modal-master-result");
+            showToast("Đã tạo văn bản LaTeX tổng.");
+        }
+
+        // ==================== CLIPBOARD & DOWNLOAD ====================
+        function copyPreamble() {
+            navigator.clipboard.writeText(CONFIG.PREAMBLE).then(() => {
+                showToast("Đã sao chép Preamble.");
+            }).catch(() => {
+                showToast("Lỗi sao chép.");
+            });
+        }
+
+        function copyFullLatex() {
+            const content = document.getElementById("master-latex-output").value;
+            navigator.clipboard.writeText(content).then(() => {
+                showToast("Đã sao chép toàn bộ mã LaTeX.");
+            }).catch(() => {
+                showToast("Lỗi sao chép.");
+            });
+        }
+
+        function downloadTex() {
+            const content = document.getElementById("master-latex-output").value;
+            const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "MATH221A_Nhom4.tex";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            showToast("Đã tải file .tex.");
+        }
+
+        // ==================== MODALS CONTROL ====================
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.add("active");
+            }
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.remove("active");
+            }
+        }
+
+        // ==================== RENDER VIEWS ====================
+        function renderAppView() {
+            const loginView = document.getElementById("login-view");
+            const dashboardView = document.getElementById("dashboard-view");
+
+            if (state.currentUser) {
+                loginView.style.display = "none";
+                dashboardView.style.display = "block";
+                
+                const idEl = document.getElementById("display-student-id");
+                const nameEl = document.getElementById("display-student-name");
+                if (idEl) idEl.textContent = `Mã sinh viên: ${state.currentUser.id}`;
+                if (nameEl) nameEl.textContent = `Họ và tên: ${state.currentUser.name}`;
+
+                renderAssignments();
+                updateProgressUI();
+            } else {
+                loginView.style.display = "flex";
+                dashboardView.style.display = "none";
+                document.getElementById("student-id-input").value = "";
+                document.getElementById("login-error").style.display = "none";
+            }
+        }
+
+        // ==================== EVENT LISTENERS ====================
+        function initEventListeners() {
+            // Setup Syntax Highlighting Editor Overlay Sync
+            setupEditorOverlaySync("submit-latex-content", "submit-latex-highlight");
+            setupEditorOverlaySync("master-latex-output", "master-latex-highlight");
+
+            // Theme toggle
+            document.getElementById("btn-theme-toggle").addEventListener("click", toggleDarkMode);
+
+            // Progress modal trigger
+            const btnProgress = document.getElementById("btn-progress-trigger");
+            if (btnProgress) {
+                btnProgress.addEventListener("click", openProgressModalFromBackend_);
+            }
+
+            // Contact modal
+            document.getElementById("btn-contact-trigger").addEventListener("click", () => openModal("modal-contact"));
+
+            // Login
+            document.getElementById("login-form").addEventListener("submit", (e) => {
+                e.preventDefault();
+                const idInput = document.getElementById("student-id-input").value;
+                loginStudent(idInput); const success = true; // loginStudent là async, tự hiện lỗi nếu sai
+                if (!success) {
+                    document.getElementById("login-error").style.display = "block";
+                }
+            });
+
+            // Logout
+            document.getElementById("btn-logout").addEventListener("click", logoutStudent);
+
+            // Copy Preamble
+            document.getElementById("btn-copy-preamble").addEventListener("click", copyPreamble);
+
+            // Save Submission
+            document.getElementById("btn-save-submission").addEventListener("click", saveSubmission);
+
+            // Comments Send
+            document.getElementById("btn-send-comment").addEventListener("click", addComment);
+
+            // Master LaTeX Generation
+            document.getElementById("btn-generate-master").addEventListener("click", handleGenerateMasterClick);
+            document.getElementById("btn-confirm-continue-master").addEventListener("click", generateFullLatex);
+
+            // Master Output Actions
+            document.getElementById("btn-copy-master").addEventListener("click", copyFullLatex);
+            document.getElementById("btn-download-tex").addEventListener("click", downloadTex);
+
+            // Close modals on click overlay / close button
+            document.querySelectorAll(".modal-overlay").forEach(overlay => {
+                overlay.addEventListener("click", (e) => {
+                    if (e.target === overlay) {
+                        overlay.classList.remove("active");
+                    }
+                });
+            });
+
+            document.querySelectorAll("[data-close]").forEach(btn => {
+                btn.addEventListener("click", () => {
+                    const targetId = btn.getAttribute("data-close");
+                    closeModal(targetId);
+                });
+            });
+
+            // ESC key closes top active modal
+            document.addEventListener("keydown", (e) => {
+                if (e.key === "Escape") {
+                    const activeModals = document.querySelectorAll(".modal-overlay.active");
+                    if (activeModals.length > 0) {
+                        activeModals[activeModals.length - 1].classList.remove("active");
+                    }
+                }
+            });
+        }
+
+        // Helpers
+        function escapeHtml(str) {
+            return str.replace(/&/g, "&amp;")
+                      .replace(/</g, "&lt;")
+                      .replace(/>/g, "&gt;")
+                      .replace(/"/g, "&quot;")
+                      .replace(/'/g, "&#039;");
+        }
+
+        function padZero(num) {
+            return num < 10 ? '0' + num : num;
+        }
+
+        // =====================================================
+        // BACKEND INTEGRATION - RESERVED FOR GOOGLE APPS SCRIPT
+        // =====================================================
+        /*
+          Sau này khi tích hợp Google Apps Script:
+          - Thay loginStudent() bằng google.script.run.withSuccessHandler(...).checkLogin(studentId)
+          - Thay saveAssignmentsToStorage() bằng google.script.run.saveAssignmentData(...)
+          - Thay saveCommentsToStorage() bằng google.script.run.saveCommentData(...)
+        */
+
+        // =====================================================
+        // BACKEND INTEGRATION - GOOGLE APPS SCRIPT (Web App /exec)
+        // =====================================================
+        const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw5_6Kj8RvwjeniVaRZXZ_R2Ws5ClQtWiNPo7UccP09er9ryFYrD88gprQ5WR1EQlhz/exec"; // https://script.google.com/macros/s/.../exec
+
+        async function callApi(action, payload) {
+            if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL.indexOf("https://script.google.com/") !== 0) {
+                throw new Error("Chưa cấu hình link Apps Script (APPS_SCRIPT_URL).");
+            }
+            const body = Object.assign({ action: action, msv: state.currentUser ? state.currentUser.id : "" }, payload || {});
+            if (action === "saveSubmission" || action === "addComment") {
+                body.requestId = (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : (Date.now() + "_" + Math.random().toString(16).slice(2));
+            }
+            let res;
+            try {
+                res = await fetch(APPS_SCRIPT_URL, {
+                    method: "POST",
+                    headers: { "Content-Type": "text/plain;charset=utf-8" },
+                    body: JSON.stringify(body)
+                });
+            } catch (e) {
+                throw new Error("Không kết nối được máy chủ. Kiểm tra mạng và thử lại.");
+            }
+            let json;
+            try {
+                json = await res.json();
+            } catch (e) {
+                throw new Error("Máy chủ trả về dữ liệu không hợp lệ. Kiểm tra link /exec và quyền truy cập (Anyone).");
+            }
+            if (!json.success) {
+                const err = new Error(json.message || "Có lỗi xảy ra.");
+                err.errorCode = json.errorCode;
+                throw err;
+            }
+            return json; // { success, message, data }
+        }
+
+        function mapAssignmentFromApi_(a) {
+            return {
+                id: a.id,
+                title: a.title,
+                student: a.student || "Thành viên nhóm",
+                questionHtml: a.questionHtml || (QUESTION_BANK[a.id] || ""),
+                overleafUrl: a.overleafUrl || "",
+                latexContent: a.latexContent || "",
+                isSubmitted: !!a.isSubmitted,
+                submittedById: a.submittedById || null,
+                submittedByName: a.submittedByName || null,
+                submittedAt: a.submittedAt || null,
+                updatedById: a.updatedById || null,
+                updatedByName: a.updatedByName || null,
+                updatedAt: a.updatedAt || null,
+                version: a.version || 0
+            };
+        }
+
+        async function refreshAssignments() {
+            if (!state.currentUser) return false;
+            try {
+                const res = await callApi("getAssignments");
+                state.assignments = res.data.assignments.map(mapAssignmentFromApi_);
+                if (res.data.member) {
+                    state.currentUser = { id: res.data.member.msv, name: res.data.member.hoTen };
+                    localStorage.setItem(CONFIG.LOCAL_STORAGE_KEYS.AUTH, JSON.stringify(state.currentUser));
+                }
+                renderAppView();
+                return true;
+            } catch (e) {
+                if (e.errorCode === "MEMBER_NOT_FOUND" || e.errorCode === "MEMBER_INACTIVE" || e.errorCode === "MSV_REQUIRED") {
+                    logoutStudent();
+                }
+                showToast(e.message);
+                return false;
+            }
+        }
+
+        function startBackendSession_() {
+            // Bỏ dữ liệu giả/cũ trong localStorage: dữ liệu thật luôn lấy từ Google Sheets.
+            state.assignments = INITIAL_ASSIGNMENTS.map(a => ({ ...a, version: 0 }));
+            state.comments = {};
+            if (state.currentUser) {
+                showToast("Đang tải dữ liệu từ máy chủ...");
+                refreshAssignments();
+            }
+        }
+
+        async function loginStudent(studentId) {
+            const cleanId = String(studentId || "").trim();
+            const errEl = document.getElementById("login-error");
+            const defaultErr = errEl.textContent;
+            try {
+                const res = await callApi("login", { msv: cleanId });
+                state.currentUser = { id: res.data.member.msv, name: res.data.member.hoTen };
+                localStorage.setItem(CONFIG.LOCAL_STORAGE_KEYS.AUTH, JSON.stringify(state.currentUser));
+                errEl.style.display = "none";
+                await refreshAssignments();
+                renderAppView();
+                showToast(`Xin chào ${state.currentUser.name}! Đăng nhập thành công.`);
+            } catch (e) {
+                state.currentUser = null;
+                errEl.textContent = e.message || defaultErr;
+                errEl.style.display = "block";
+            }
+        }
+
+        let isSavingSubmission_ = false;
+        async function saveSubmission() {
+            if (isSavingSubmission_) return;
+            const id = parseInt(document.getElementById("submit-assignment-id").value, 10);
+            const overleafUrl = document.getElementById("submit-overleaf-url").value.trim();
+            const latexContent = document.getElementById("submit-latex-content").value.trim();
+            const target = state.assignments.find(a => a.id === id);
+            if (!target) return;
+            if (!overleafUrl && !latexContent) {
+                showToast("Vui lòng nhập Link Overleaf hoặc nội dung LaTeX.");
+                return;
+            }
+            const btn = document.getElementById("btn-save-submission");
+            isSavingSubmission_ = true;
+            btn.disabled = true;
+            try {
+                const res = await callApi("saveSubmission", {
+                    assignmentId: id,
+                    latexContent: latexContent,
+                    overleafUrl: overleafUrl,
+                    baseVersion: target.version
+                });
+                await refreshAssignments();
+                closeModal("modal-submit");
+                showToast(res.message || "Đã lưu bài nộp.");
+            } catch (e) {
+                if (e.errorCode === "VERSION_CONFLICT") {
+                    await refreshAssignments(); // lấy version mới, giữ nguyên nội dung đang nhập trong modal
+                }
+                showToast(e.message);
+            } finally {
+                isSavingSubmission_ = false;
+                btn.disabled = false;
+            }
+        }
+
+        async function openDetailModal(assignmentId) {
+            renderDetailModal_(assignmentId); // hiện ngay dữ liệu đang có
+            try {
+                const res = await callApi("getAssignmentDetails", { assignmentId: assignmentId });
+                const idx = state.assignments.findIndex(a => a.id === assignmentId);
+                if (idx !== -1) state.assignments[idx] = mapAssignmentFromApi_(res.data.assignment);
+                state.comments[assignmentId] = res.data.comments || [];
+                renderAssignments();
+                if (document.getElementById("modal-detail").classList.contains("active")) {
+                    renderDetailModal_(assignmentId);
+                }
+            } catch (e) {
+                showToast(e.message);
+            }
+        }
+
+        async function openCommentModal(assignmentId) {
+            showCommentModal_(assignmentId);
+            try {
+                const res = await callApi("getComments", { assignmentId: assignmentId });
+                state.comments[assignmentId] = res.data.comments || [];
+                const stillOpen = document.getElementById("modal-comment").classList.contains("active")
+                    && parseInt(document.getElementById("comment-assignment-id").value, 10) === assignmentId;
+                if (stillOpen) renderCommentsList(assignmentId);
+            } catch (e) {
+                showToast(e.message);
+            }
+        }
+
+        let isSendingComment_ = false;
+        async function addComment() {
+            if (isSendingComment_) return;
+            const assignmentId = parseInt(document.getElementById("comment-assignment-id").value, 10);
+            const input = document.getElementById("comment-input");
+            const text = input.value.trim();
+            if (!text || !state.currentUser) return;
+            const btn = document.getElementById("btn-send-comment");
+            isSendingComment_ = true;
+            btn.disabled = true;
+            try {
+                const res = await callApi("addComment", { assignmentId: assignmentId, comment: text });
+                state.comments[assignmentId] = res.data.comments || [];
+                input.value = "";
+                renderCommentsList(assignmentId);
+                showToast(res.message || "Comment đã được gửi.");
+            } catch (e) {
+                showToast(e.message);
+            } finally {
+                isSendingComment_ = false;
+                btn.disabled = false;
+            }
+        }
+
+        async function openProgressModalFromBackend_() {
+            await refreshAssignments(); // getAssignments đã gồm tiến độ tính từ Google Sheets
+            openProgressModal();
+        }
+
+        async function handleGenerateMasterClick() {
+            await refreshAssignments();
+            handleGenerateMasterClickLocal_();
+        }
+
+        // App Initialization
+        document.addEventListener("DOMContentLoaded", () => {
+            initLocalStorage();
+            initEventListeners();
+            startBackendSession_();
+            renderAppView();
+        });
+    </script>
+</body>
+</html>
