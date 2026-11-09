@@ -1400,8 +1400,8 @@ Nội dung lời giải
 
         // ==================== DEADLINE CHECK LOGIC ====================
         // Hạn nộp: 12:00:00 ngày 10/11/2026 (Giờ Việt Nam UTC+7)
-        // 12:00 VN = 15:00 UTC -> Date.UTC(2026, 9, 13, 15, 0, 0)
-        const SUBMISSION_DEADLINE_TIMESTAMP = Date.UTC(2026, 9, 13, 15, 0, 0);
+        // 12:00 VN = 05:00 UTC -> Date.UTC(2026, 10, 10, 5, 0, 0)
+        const SUBMISSION_DEADLINE_TIMESTAMP = Date.UTC(2026, 10, 10, 5, 0, 0);
 
         function isSubmissionDeadlinePassed() {
             return Date.now() >= SUBMISSION_DEADLINE_TIMESTAMP;
